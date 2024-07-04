@@ -2,7 +2,6 @@
 #define BUFFER_SIZE 4096
 #define PAGE_SIZE 20
 
-
 struct page { 
     char fixed; // page in use 
     char buff[BUFFER_SIZE];
@@ -11,6 +10,12 @@ struct page {
     int pageNo; // page no on disk
     int counter; // counter for LRU
 };
+extern int getFreeSlotIndex();
+extern int lru_page() ;
+extern char page_in_buffer(int pageNo);
+extern char page_in_buffer(int pageNo);
+extern struct page clean_dirty_page(int dirtyPage);
+
 
 
 int pageAllocationCounter = 0;

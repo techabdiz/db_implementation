@@ -5,29 +5,24 @@
 #include <errno.h>
 
 
-#define MAX_PAGES_IN_DISK 1024
+extern void seekToPage(int pageNo, int fd);
 
-const char* META_FILE = "./_db.ini";
-const char* DATA_FILE  = "./_data.ini";
-
-struct  disk_node {
-    int offset;
-    char buffer[PAGE_SIZE];
-    int is_deleted;
-    int pageNo;
-};
-
-int writePage(buffer, diskPageNo) { 
-
+int writePage(int pageNo, const char* filesName, char* buffer) { 
+    int fd =  open (filesName, O_RDWR);
+    seekToPage(pageNo, fd);
+    int nbytes = write(fd, buffer, BUFFER_SIZE);
+    close(fd);
 }
 
-
-
-char* readPage(int pageNo, const char* filesName) { // pool the page buffer
-    char buffer[PAGE_SIZE];
-    int distance = pageNo*PAGE_SIZE;
+int readPage(int pageNo, const char* filesName, char* buffer) { // pool the page buffer
     int fd =  open (filesName, O_RDONLY);
-    lseek(fd, distance, 0);
-    read(fd, buffer, PAGE_SIZE);
+    seekToPage(pageNo, fd);
+    int bytesRead = read(fd, buffer, BUFFER_SIZE);
     close(fd);
+    return bytesRead;
+}
+
+void seekToPage(int pageNo, int fd) { 
+    int distance = pageNo*BUFFER_SIZE;
+    lseek(fd, distance, 0);
 }
