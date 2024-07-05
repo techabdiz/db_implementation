@@ -6,15 +6,17 @@ int main(int argc, char const *argv[])
 
 
 init_master_block();
-   // for(int i = 0; i < 120; i++) {
-    writeDBPage(50, "please save this to the db");
-   // char buf[PAGE_SIZE];
-   //readDBPage(1, buf);
-   //printf("value in the page: %s\n", buf);
 
-   // }
 
-    
+    char writebuffer[PAGE_SIZE];
 
-    return 0;
+    for(int i = 1; i < 100; i ++ ) { 
+        sprintf(writebuffer, "writing to page: %d", i);
+        writeDBPage(i, writebuffer);
+    }
+
+
+    char buf[PAGE_SIZE];
+    readDBPage(20, buf);
+    printf("\n\nvalue in the page: %s\n\n", buf);
 }
