@@ -1,22 +1,26 @@
-#include "./pageman.c"
+#include "./dmem.c"
 
 
 int main(int argc, char const *argv[])
 {
 
 
-init_master_block();
+    init();
 
 
-    char writebuffer[PAGE_SIZE];
+   char writebuffer[PAGE_SIZE];
 
-    for(int i = 1; i < 100; i ++ ) { 
-        sprintf(writebuffer, "writing to page: %d", i);
+    /*for(int i = 1; i < 50000; i ++ ) { 
+        sprintf(writebuffer, "to page: %d", i);
+
+        printf("writing pgae %s\n", writebuffer);
         writeDBPage(i, writebuffer);
-    }
+    }*/
 
-
-    char buf[PAGE_SIZE];
-    readDBPage(20, buf);
-    printf("\n\nvalue in the page: %s\n\n", buf);
+    read_mem_page(22, writebuffer);
+    read_mem_page(22, writebuffer);
+    read_mem_page(22, writebuffer);
+    read_mem_page(22, writebuffer);
+    read_mem_page(22, writebuffer);
+    printf("\n\nvalue in the page: %s\n\n", writebuffer);
 }

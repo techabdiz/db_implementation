@@ -1,8 +1,11 @@
-#include "./dmem.c"
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
+
+#ifndef BUFFER_SIZE 
+    #define BUFFER_SIZE 4096
+#endif
 
 
 extern void seekToPage(int pageNo, int fd);
