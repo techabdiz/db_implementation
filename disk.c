@@ -7,6 +7,7 @@
     #define BUFFER_SIZE 4096
 #endif
 
+int disk_op_counter  = 0;
 
 extern void seekToPage(int pageNo, int fd);
 
@@ -15,6 +16,7 @@ int writePage(int pageNo, const char* filesName, char* buffer) {
     seekToPage(pageNo, fd);
     int nbytes = write(fd, buffer, BUFFER_SIZE);
     close(fd);
+    disk_op_counter++;
 }
 
 int readPage(int pageNo, const char* filesName, char* buffer) { // pool the page buffer
@@ -22,6 +24,7 @@ int readPage(int pageNo, const char* filesName, char* buffer) { // pool the page
     seekToPage(pageNo, fd);
     int bytesRead = read(fd, buffer, BUFFER_SIZE);
     close(fd);
+    disk_op_counter++;
     return bytesRead;
 }
 

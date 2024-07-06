@@ -3,7 +3,7 @@
 #include "./pageman.c"
 
 #define BUFFER_SIZE 4096
-#define PAGE_SIZE 20
+#define PAGE_SIZE 4096
 #define new_max(x,y) (((x) >= (y)) ? (x) : (y))
 #define new_min(x,y) (((x) <= (y)) ? (x) : (y))
 
@@ -97,14 +97,14 @@ struct page* clean_dirty_page(int dirtyPage) {
 
 
 char page_in_buffer(int pageNo){
-    printf("looking for page%d in memory\n", pageNo);
+   // printf("looking for page%d in memory\n", pageNo);
     for(int i = 0; i < PAGE_SIZE; i++) { 
         if(pages[i].pageNo == pageNo){ 
-            printf("found page %d in memory index %d\n", pageNo, i);
+           // printf("found page %d in memory index %d\n", pageNo, i);
             return 1;
         }
     }
-    printf("---------> no page found for pageNo: %d\n", pageNo);
+    //printf("---------> no page found for pageNo: %d\n", pageNo);
     return 0;
 }
 
