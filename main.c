@@ -17,10 +17,16 @@ int main(int argc, char const *argv[])
         writeDBPage(i, writebuffer);
     }*/
 
-    read_mem_page(22, writebuffer);
-    read_mem_page(22, writebuffer);
-    read_mem_page(22, writebuffer);
-    read_mem_page(22, writebuffer);
-    read_mem_page(22, writebuffer);
+   print_all_pages();
+
+    for(int i = 1; i < 25; i++ ) { 
+        read_mem_page(i, writebuffer);
+    }
+
+    read_mem_page(5, writebuffer);
+    read_mem_page(303, writebuffer);
+
+
+    print_all_pages();
     printf("\n\nvalue in the page: %s\n\n", writebuffer);
 }
