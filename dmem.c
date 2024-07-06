@@ -36,6 +36,7 @@ int read_mem_page(int page_no, char* buff) {
     if(page_in_buffer(page_no)) {
         get_page(page_no)->counter = pageAllocationCounter++;
         memcpy(buff,get_page(page_no)->buff, PAGE_SIZE);
+        return 1;
     }
     struct  page* p = getFreeSlot();
     p->pageNo = page_no;
