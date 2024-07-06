@@ -46,13 +46,23 @@ int read_mem_page(int page_no, char* buff) {
 
 int write_mem_page(int page_no, char* buf) { 
     if(page_in_buffer(page_no)) {
-        memcpy(buf, get_page(page_no)->buff, BUFFER_SIZE);
+        struct page* cpage = get_page(page_no);
+        memcpy(cpage->buff, buf, BUFFER_SIZE);
+        cpage->dirty=1;
+        cpage->flushed = 0;
+        cpage->counter = pageAllocationCounter++;
+        cpage->fixed=1;
         return 1;
     }
     char temp_buff[BUFFER_SIZE];
     read_mem_page(page_no, temp_buff); // bringing page in memory
     if(page_in_buffer(page_no)) {
-        memcpy(get_page(page_no)->buff, buf, BUFFER_SIZE);
+        struct page* cpage = get_page(page_no);
+        memcpy(cpage->buff, buf, BUFFER_SIZE);
+        cpage->dirty=1;
+        cpage->flushed = 0;
+        cpage->counter = pageAllocationCounter++;
+        cpage->fixed=1;
         return 1;
     }
     return -1;
