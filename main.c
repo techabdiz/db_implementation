@@ -17,8 +17,14 @@ int printRandoms(int n)
 } 
 
 void execute() {
-
+  printf("Executing containers");
    char writebuffer[PAGE_SIZE];
+
+   for(int i = 0; i < 10000; i++ ) {
+    printf("wriing pages");
+    sprintf(writebuffer, "writing page no: %d", i);
+      write_mem_page(i, writebuffer);
+   } 
 
    int generate_random(int min, int max){
         return rand() % (max - min + 1) + min;
@@ -51,6 +57,7 @@ int main(int argc, char const *argv[])
     srand(time(NULL));
 
     init();
+    printf("executing... ");
     execute();
     printf("----------------------------------------------------\ntotal disk ops --> %d\n----------------------------------------------------\n", disk_op_counter);
 }
