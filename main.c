@@ -26,9 +26,9 @@ void execute() {
 
    //print_all_pages();
 
-   // write_mem_page(751, "writing value to the page");
+    //write_mem_page(751, "update page");
 
-    for(int i = 1; i < 10000; i++ ) {
+    for(int i = 1; i < 10; i++ ) {
         int rando =  generate_random(1, 10000);
         
         read_mem_page(rando, writebuffer);
