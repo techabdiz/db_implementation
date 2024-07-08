@@ -8,4 +8,4 @@ RUN gcc main.c -o main
 
 COPY *.ini .
 
-ENTRYPOINT [ "./main" ]z
+ENTRYPOINT [ "./main" ]
